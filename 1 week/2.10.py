@@ -1,9 +1,18 @@
-f = open('input3.txt', 'r', encoding="utf-8")
-a = f.read()
-A=a
-c = ['б', 'в', 'г', 'л', 'ж', 'з', 'й', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ']
-g = ['а', 'е', 'ё', 'и', 'о', 'у', 'ы', 'э', 'ю', 'я']
-for i in range(1, len(A)):
-    if ((A[i-1] in c) or (A[i-1] == ' ')) and (A[i] in g) and ((A[i+1] in c) or (A[i+1] == ' ')):
-        A = A.replace(A[i], A[i] + 'c' + A[i])
-print(A)
+f = open('input3.txt', 'r', encoding='utf-8')
+c = f.read()
+def translate_to_whistling_language(text):
+    glas = 'аеёиоуыэюя'
+    res = []
+    i = 0
+    while i < len(text):
+        char = text[i]
+        if char in glas:
+            res.append(char)
+            if i > 0 and text[i - 1] not in glas:
+                res.append('с' + char)
+        else:
+            res.append(char)
+        i += 1
+    return ''.join(res)
+translated_c = translate_to_whistling_language(c)
+print(translated_c)
