@@ -1,25 +1,23 @@
-class Vector():
-  def __init__(self, x, y, z):
-      assert isinstance(x, (int, float)) and not isinstance(x, bool)
-      assert isinstance(y, (int, float)) and not isinstance(y, bool)
-      assert isinstance(z, (int, float)) and not isinstance(z, bool)
-      self.x = x
-      self.y = y
-      self.z = z
-  def __abs__(self):
-     return(self.x**2+self.z**2+self.z**2)**0.5
-  def __add__(self, other):
-      assert isinstance(other, Vector)
-      return Vector(self.x+other.x, self.y+other.y, self.z+other.z)
-  def __sub__(self, other):
-      assert isinstance(other, Vector)
-      return Vector(self.x - other.x, self.y - other.y, self.z - other.z)
-  def __mul__(self, other):
-      if isinstance(other, Vector):
-          return Vector(self.x*other,self.y*other,self.z*other)
-      if isinstance(other, (int, float)):
-          return Vector(self.x * other, self.y * other, self.z * other)
-      else:
-          raise AssertionError
-      def __str__(self):
-          return f'x = {self.x}, y={self.y}, z={self.z}'
+import tkinter as tk
+def calc():
+    vhod = entry.get()
+    try:
+        res = eval(vhod)
+        output.config(text="Ответ: " + str(res))
+    except:
+        output.config(text="Ошибка вычисления")
+
+root = tk.Tk()
+root.title("Калькулятор")
+root.geometry("400x200")
+
+entry = tk.Entry(root, width=50)
+entry.pack(pady=10)
+
+button = tk.Button(root, text="Вычислить", command=calc)
+button.pack()
+
+output = tk.Label(root, text="")
+output.pack(pady=10)
+
+root.mainloop()
